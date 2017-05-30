@@ -110,9 +110,7 @@ PanelManager.prototype.closePanel = function(index) {
         if (this.panels.length > 1) p.element.style.setProperty("transition-delay", "0.15s");
         p.element.style.setProperty(this.alignment, parseInt(p.element.style[this.alignment]) - (parseInt(p.element.style.width) + 10) + "px");
 
-        setTimeout(function() {
-            p.element.style = "";
-        }, parseFloat(p.element.style.transitionDuration) * 1000);
+        this.resetPanel(p);
 
         for (var i = 0; i < index; i++) {
             var p2 = this.panels[i];
@@ -163,4 +161,10 @@ PanelManager.prototype.resetTransitionClose = function(element, newT, t) {
     setTimeout(function() {
         element.style.setProperty("transition-duration", t);
     }, parseFloat(newT) * 1000);
+}
+
+PanelManager.prototype.resetPanel = function(p) {
+    setTimeout(function() {
+        p.element.setAttribute("style", "");
+    }, parseFloat(p.element.style.transitionDuration) * 1000);
 }
